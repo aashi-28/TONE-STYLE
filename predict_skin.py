@@ -1,23 +1,24 @@
-import tensorflow as tf
+import cv2
 import numpy as np
-from PIL import Image
+import tensorflow as tf
 
-# Load the new .keras model (modern format)
 model = tf.keras.models.load_model("skin_tone_model.keras")
+skin_tone_labels = ["Light", "Medium", "Dark"]  # MUST match training order
 
-# Define your class labels (same as in Colab)
-class_names = ['dark', 'light', 'medium']
+def predict_skin_tone(face_img):
+    # Resize to match training input
+    face_img = cv2.resize(face_img, (224, 224))
 
-# Load and preprocess test image
-img_path = "test1.jpg"
-img = Image.open(img_path).convert("RGB").resize((160, 160))
-x = np.array(img)
-x = np.expand_dims(x, axis=0)
-x = tf.keras.applications.mobilenet_v2.preprocess_input(x)
+    # Convert to float32
+    face_img = face_img.astype(np.float32)
 
-# Predict
-pred = model.predict(x)
-predicted_class = np.argmax(pred, axis=1)[0]
-confidence = np.max(pred)
+    # IMPORTANT: same preprocessing as training (MobileNet)
+    face_img = tf.keras.applications.mobilenet_v2.preprocess_input(face_img)
 
-print(f"Predicted skin tone: {class_names[predicted_class]} (Confidence: {confidence:.2f})")
+    # Add batch dimension
+    face_img = np.expand_dims(face_img, axis=0)
+
+    # Predict
+    prediction = model.predict(face_img, verbose=0)
+
+    return skin_tone_labels[np.argmax(prediction)]

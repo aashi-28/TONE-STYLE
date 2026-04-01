@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 import math
 from pathlib import Path
+import joblib
 
 # ---------------- CONFIG ----------------
 MODEL_FILE = "skin_tone_model.keras"
@@ -80,6 +81,7 @@ COLOR_RECOMMENDATIONS = {
 def main():
     print("Loading model...")
     model = load_model_safe(MODEL_FILE)
+    voting_model = joblib.load("voting_model.pkl")
     print("Model loaded successfully.")
 
     face_cascade = cv2.CascadeClassifier(
@@ -119,7 +121,10 @@ def main():
             undertone = detect_undertone(a, b)
 
             # ---- FINAL SKIN TONE (LAB-BASED) ----
-            skin_tone = skin_tone_from_lab(L)
+            features = [[L, a, b, ita]]
+
+            skin_tone = voting_model.predict(features)[0]
+ 
 
             # ---- COLOR RECOMMENDATION ----
             recommended_colors = COLOR_RECOMMENDATIONS.get(

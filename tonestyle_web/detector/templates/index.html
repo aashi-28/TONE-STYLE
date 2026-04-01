@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToneStyle</title>
+</head>
+<body>
+
+<h1>🎨 ToneStyle</h1>
+
+<!-- Upload -->
+<h2>Upload Image</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image">
+    <button type="submit">Analyze</button>
+</form>
+
+<hr>
+
+<!-- Webcam -->
+<h2>Webcam</h2>
+
+<video id="video" width="300" height="200" autoplay></video><br>
+<button onclick="capture()">Capture</button>
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<form method="POST" id="webcamForm">
+    {% csrf_token %}
+    <input type="hidden" name="webcam_image" id="webcam_image">
+</form>
+
+<hr>
+
+{% if result %}
+    <h2>Skin Tone: {{ result.tone }}</h2>
+    <h2>Undertone: {{ result.undertone }}</h2>
+    <h2>Colors: {{ result.colors }}</h2>
+{% endif %}
+
+<script>
+// webcam start
+const video = document.getElementById('video');
+
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => {
+    video.srcObject = stream;
+});
+
+// capture
+function capture() {
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    context.drawImage(video, 0, 0);
+
+    let data = canvas.toDataURL('image/png');
+
+    document.getElementById('webcam_image').value = data;
+    document.getElementById('webcamForm').submit();
+}
+</script>
+
+</body>
+</html>

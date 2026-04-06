@@ -35,14 +35,19 @@ Multi-frame Smoothing → Averages predictions over frames for stability
 Color Recommendation → Suggests suitable colors based on tone + undertone
 
  Project Structure
-ToneStyle/
+TONE-STYLE/
 │
-├── webcam_skin_detect.py
-├── predict_skin.py
-├── skin_tone_model.keras
-├── tonestyle_color_dataset.csv
-├── test1.jpg
-└── README.md
+├── src/                 # Core ML logic
+├── models/              # Trained models
+├── data/                # Dataset
+├── web_app/             # UI / Web interface
+├── notebooks/           # Experiments
+├── demo/                # Sample outputs
+│
+├── main.py              # Run file
+├── requirements.txt
+├── README.md
+├── .gitignore
 
  ow to Run
 1. Clone Repository

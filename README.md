@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎨 ToneStyle AI
+# 🎨 ToneStyle 
 ### Real-time Skin Tone Detection & Personalized Color Recommendation System
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)

@@ -116,17 +116,6 @@ Used for validation, feature-based ML classification, and model testing.
 | SSD (OpenCV DNN) | Real-time face detection |
 | Voting Classifier | Ensemble ML classification |
 
----
-
-## 📈 GitHub Stats
-
-<div align="center">
-
-![Aashi's GitHub Stats](https://github-readme-stats.vercel.app/api?username=aashi-28&show_icons=true)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=aashi-28&layout=compact)
-
-</div>
 
 ---
 

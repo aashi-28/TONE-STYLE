@@ -18,6 +18,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
+# Required when DEBUG=False and you accept POST requests (e.g. image upload form)
+# from an HTTPS domain. Without this, uploads will fail with a 403 CSRF error.
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
+
 
 # Application definition
 
@@ -103,6 +107,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Media files (user-uploaded images for skin tone detection)
+# NOTE: Render's free tier has an ephemeral filesystem — uploaded files
+# will be wiped on restart/redeploy. Fine for demo use within a session.
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type

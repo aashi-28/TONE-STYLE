@@ -22,7 +22,7 @@ COLOR_MAP = {
     ("dark", "Neutral"): ["Charcoal", "White", "Crimson"]
 }
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 PROTOTXT_PATH = str(BASE_DIR / "deploy.prototxt")
 CAFFEMODEL_PATH = str(BASE_DIR / "res10_300x300_ssd_iter_140000.caffemodel")
 

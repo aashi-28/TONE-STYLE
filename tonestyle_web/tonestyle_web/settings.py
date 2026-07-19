@@ -20,7 +20,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Required when DEBUG=False and you accept POST requests (e.g. image upload form)
 # from an HTTPS domain. Without this, uploads will fail with a 403 CSRF error.
-CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com", "https://*.hf.space"]
 
 
 # Application definition
